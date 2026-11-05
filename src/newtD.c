@@ -2,10 +2,10 @@
 #include <math.h>
 #define NRANSI
 #include "../include/nrutilD.h"
-#define MAXITS 200
-#define TOLF 1.0e-5
-#define TOLMIN 1.0e-8
-#define TOLX 1.0e-8
+#define MAXITS 500
+#define TOLF 1.0e-10
+#define TOLMIN 1.0e-12
+#define TOLX 1.0e-12
 #define STPMX 10000.0
 
 int nn;
@@ -20,7 +20,7 @@ void newt(double x[], int n, int *check,
 {
 	void fdjac(int n, double x[], double fvec[], double **df,
 		void (*vecfunc)(int, double [], double []));
-	double fminimum(double x[]);
+	double get_minimum_of_f(double x[]);
 	void lnsrch(int n, double xold[], double fold, double g[], double p[], double x[],
 		 double *f, double stpmax, int *check, double (*func)(double []));
 	void lubksb(double **a, int n, int *indx, double b[]);
@@ -36,7 +36,7 @@ void newt(double x[], int n, int *check,
 	fvec=vector(1,n);
 	nn=n;
 	nrfuncv=vecfunc;
-	f=fminimum(x);
+	f=get_minimum_of_f(x);
 	test=0.0;
 	for (i=1;i<=n;i++)
 		if (fabs(fvec[i]) > test) test=fabs(fvec[i]);
@@ -57,7 +57,7 @@ void newt(double x[], int n, int *check,
 		for (i=1;i<=n;i++) p[i] = -fvec[i];
 		ludcmp(fjac,n,indx,&d);
 		lubksb(fjac,n,indx,p);
-		lnsrch(n,xold,fold,g,p,x,&f,stpmax,check,fminimum);
+		lnsrch(n,xold,fold,g,p,x,&f,stpmax,check,get_minimum_of_f);
 		test=0.0;
 		for (i=1;i<=n;i++)
 			if (fabs(fvec[i]) > test) test=fabs(fvec[i]);

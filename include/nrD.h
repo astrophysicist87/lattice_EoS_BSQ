@@ -180,7 +180,7 @@ void fitexy(double x[], double y[], int ndat, double sigx[], double sigy[],
 void fixrts(double d[], int m);
 void fleg(double x, double pl[], int nl);
 void flmoon(int n, int nph, long *jd, double *frac);
-double fminimum(double x[]);
+double get_minimum_of_f(double x[]);
 void four1(double data[], unsigned long nn, int isign);
 void fourew(FILE *file[5], int *na, int *nb, int *nc, int *nd);
 void fourfs(FILE *file[5], unsigned long nn[], int ndim, int isign);
@@ -638,7 +638,7 @@ void fitexy();
 void fixrts();
 void fleg();
 void flmoon();
-double fminimum();
+double get_minimum_of_f();
 void four1();
 void fourew();
 void fourfs();

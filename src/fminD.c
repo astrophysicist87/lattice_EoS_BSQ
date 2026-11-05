@@ -6,7 +6,7 @@ extern int nn;
 extern double *fvec;
 extern void (*nrfuncv)(int n, double v[], double f[]);
 
-double fminimum(double x[])
+double get_minimum_of_f(double x[])
 {
 	int i;
 	double sum;
